@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative-SanskritiSriv</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           CREATIVE VIBE VARIABLES (Dark Themed)
+        ========================================= */
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --text-light: #e0e0e0;
+            --text-dim: #8a8a8a;
+            --accent-gold: #ad8a4c;
+            --accent-red: #941a2f;
+            --accent-vibrant: #ff3a5e;
+            
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Playfair Display', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        
+        html {
+            background-color: var(--bg-dark);
+            overflow-x: hidden; 
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           CUSTOM CURSOR
+        ========================================= */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor.grow {
+            transform: scale(4);
+            background-color: var(--text-light);
+            border: none;
+            mix-blend-mode: difference;
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+        .creative-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 3rem;
+            z-index: 100;
+        }
+        .nav-logo {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.25rem; 
+            color: white;
+            text-decoration: none;
+        }
+        
+        .back-home-fixed {
+            position: fixed;
+            top: 2rem;
+            right: 3rem;
+            z-index: 101;
+        }
+        .back-home {
+            font-family: var(--font-body);
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            position: relative;
+        }
+        .back-home::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        .back-home:hover::after { width: 100%; }
+
+        /* =========================================
+           SHARED UTILITIES
+        ========================================= */
+        section {
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container { max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        .huge-text {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 12vw, 9rem);
+            line-height: 0.9;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--bg-darker);
+            -webkit-text-stroke: 2px var(--text-light);
+            opacity: 0.3;
+            position: absolute;
+            z-index: 0;
+            white-space: nowrap;
+        }
+        .section-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        .section-heading {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        /* =========================================
+           HERO: THE HOOK
+        ========================================= */
+        .hero-creative {
+            align-items: flex-start;
+            padding-top: 15vh;
+        }
+        .hero-title-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 1.1;
+            font-weight: 900;
+        }
+        .hero-title .highlight {
+            color: var(--accent-gold);
+            font-style: italic;
+            display: inline-block;
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-top: 3rem;
+            color: var(--text-dim);
+            border-left: 4px solid var(--accent-red);
+            padding-left: 2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            right: 3rem;
+            bottom: 2rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            transform: rotate(90deg);
+            transform-origin: bottom right;
+        }
+        .scroll-indicator span {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-dim);
+        }
+        .scroll-indicator .line {
+            width: 50px;
+            height: 1px;
+            background-color: var(--text-dim);
+            margin-right: 1rem;
+            opacity: 1;
+        }
+
+        /* =========================================
+           SECTION 1: THE CREATOR (YouTube)
+        ========================================= */
+        .creator-section {
+            background-color: var(--bg-darker);
+            align-items: center;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+        .video-frame {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+        .video-frame:hover {
+            transform: scale(1.02);
+        }
+        .video-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .see-more-link {
+            display: inline-block;
+            text-align: right;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            z-index: 2;
+            position: relative;
+        }
+        .see-more-link:hover {
+            color: var(--text-light);
+        }
+
+        /* =========================================
+           SECTION 2: THE STAGE (Dance/Speaking)
+        ========================================= */
+        .stage-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            min-height: 80vh;
+            align-items: center;
+        }
+        .stage-text h2 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+        .stage-text p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        .collage-wrapper {
+            position: relative;
+            height: 600px;
+        }
+        .collage-img {
+            position: absolute;
+            object-fit: cover;
+            border-radius: 12px;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+            box-shadow: -10px 10px 30px rgba(0,0,0,0.5);
+        }
+        .collage-img:hover {
+            filter: grayscale(0%);
+            z-index: 10 !important;
+            transform: scale(1.1) !important;
+        }
+        .img-dance {
+            width: 300px;
+            height: 400px;
+            top: 0;
+            right: 0;
+            z-index: 2;
+            transform: rotate(5deg);
+        }
+        .img-speak {
+            width: 350px;
+            height: 250px;
+            bottom: 50px;
+            left: 0;
+            z-index: 1;
+            transform: rotate(-5deg);
+            object-position: center 27%;
+        }
+
+        /* =========================================
+           SECTION 3: THE GALLERY (Painting)
+        ========================================= */
+        .painting-section {
+            background-color: var(--bg-dark);
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .painting-scroll-wrapper {
+            display: flex;
+            overflow-x: auto;
+            padding: 2rem 0 2rem 3rem;
+            z-index: 2;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            cursor: grab; 
+        }
+        .painting-scroll-wrapper:active {
+            cursor: grabbing;
+        }
+        .painting-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .painting-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            height: 450px;
+            width: 350px;
+            margin-right: 2rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .painting-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        .painting-card:hover img {
+            transform: scale(1.1);
+            opacity: 0.15;
+        }
+        
+        .painting-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            white-space: normal;
+        }
+        .painting-card:hover .painting-info {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .painting-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        .painting-inspiration {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           SECTION 4: THE LIBRARY (Books/Quiet)
+        ========================================= */
+        .library-section {
+            overflow: hidden;
+            padding: 8rem 0;
+            background: var(--bg-darker);
+            position: relative;
+        }
+        
+        .ticker-wrap {
+            width: 100%;
+            overflow-x: auto; 
+            white-space: nowrap;
+            cursor: grab; 
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            display: flex;
+            align-items: center;
+            padding-bottom: 2rem; 
+        }
+        .ticker-wrap:active {
+            cursor: grabbing;
+        }
+        .ticker-wrap::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .ticker {
+            display: flex; 
+            padding-left: 3rem;
+        }
+
+        .book-card {
+            display: inline-block;
+            width: 300px;
+            height: 450px;
+            margin-right: 4rem; 
+            background: #1a1a1a;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0; 
+            transition: transform 0.3s ease;
+        }
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+        .book-card:hover .book-cover { 
+            opacity: 0.15; 
+        }
+
+        .book-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.95);
+            overflow-y: auto; 
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            white-space: normal; 
+        }
+        .book-card:hover .book-info {
+            transform: translateY(0);
+        }
+        .book-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+        
+        .book-review {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            font-style: normal;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           SECTION 5: THE FAVOURITES
+        ========================================= */
+        .favorites-section {
+            background-color: var(--bg-dark);
+        }
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            z-index: 2;
+        }
+        .favorites-column h3 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-red);
+            padding-bottom: 1rem;
+            display: inline-block;
+        }
+        .favorites-column ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .favorites-column li {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           FOOTER: THE PORTAL BACK & SOCIALS
+        ========================================= */
+        .portal-footer {
+            min-height: 40vh; 
+            text-align: center;
+            align-items: center;
+            padding-bottom: 4rem;
+        }
+        
+        /* The Text is now unclickable (div instead of a) */
+        .creative-text {
+            font-family: var(--font-heading);
+            font-size: 5vw;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--accent-red);
+            transition: all 0.5s ease;
+            position: relative;
+            display: inline-block;
+            cursor: default; /* Shows standard cursor */
+        }
+        /* Text still has hover glow, but no pointer */
+        .creative-text:hover {
+            color: var(--accent-red);
+        }
+
+        /* NEW: Creative Social Links Container */
+        .social-links-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2.5rem; 
+        }
+
+        .social-btn {
+            width: 70px; /* Slightly larger for better clicking */
+            height: 70px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Forces pointer even if global is none */
+        }
+
+        /* Glow effects */
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.2);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Instagram Brand Hover */
+        .social-btn.insta:hover {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            box-shadow: 0 10px 20px rgba(214, 36, 159, 0.3);
+        }
+
+        /* YouTube Brand Hover */
+        .social-btn.yt:hover {
+            background: #FF0000;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Email Brand Hover (Gold) */
+        .social-btn.email:hover {
+            background: var(--accent-gold);
+            box-shadow: 0 10px 20px rgba(173, 138, 76, 0.3);
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 768px) {
+            .cursor { display: none; }
+            * { cursor: auto; }
+
+            .creative-nav { padding: 1.5rem; }
+            .back-home-fixed { top: 1.5rem; right: 1.5rem; }
+            .nav-logo { font-size: 1rem; }
+            
+            .hero-title { font-size: 3.5rem; }
+            .scroll-indicator { display: none; }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            .see-more-link {
+                text-align: center;
+            }
+            
+            .stage-grid { 
+                grid-template-columns: 1fr; 
+                gap: 2rem; 
+            }
+            .stage-text h2 { font-size: 3rem; }
+            .collage-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: auto; 
+                margin-top: 2rem;
+                position: static;
+            }
+            .collage-img {
+                position: static; 
+                transform: none !important;
+                filter: grayscale(0%); 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            }
+            .img-dance {
+                width: 80%;
+                height: auto;
+                aspect-ratio: 3/4;
+                margin-bottom: 2rem; 
+            }
+            .img-speak {
+                width: 80%;
+                height: auto;
+                aspect-ratio: 4/3;
+            }
+
+            .painting-scroll-wrapper {
+                padding-left: 1.5rem;
+            }
+            .painting-card {
+                width: 280px;
+                height: 400px;
+            }
+            
+            /* On mobile, the books are just a normal scrollable list */
+            .book-card { width: 200px; height: 300px; margin-right: 1rem; }
+            .book-review { 
+                font-size: 0.85rem; 
+                line-height: 1.5;
+            }
+            .book-title {
+                font-size: 1.2rem;
+            }
+            .book-info {
+                padding: 1.5rem;
+            }
+
+            .favorites-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .creative-text {
+                font-size: 2rem;
+            }
+            
+            .social-links-container {
+                gap: 1.5rem;
+            }
+            .social-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.4rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <nav class="creative-nav">
+        <a href="index.html" class="nav-logo">Sanskriti Srivastava</a>
+    </nav>
+    <div class="back-home-fixed">
+        <a href="index.html" class="back-home" data-hover-text="Return to safety">Go to Professional Portfolio</a>
+    </div>
+
+    <section class="hero-creative">
+        <div class="huge-text" style="top: 10%; left: -5%;">Unfiltered</div>
+        <div class="container hero-title-wrapper">
+            <h1 class="hero-title">
+                Looking for the<br>
+                <span class="highlight" data-hover-text="Limitless">human</span> behind<br>
+                the hustle?
+            </h1>
+            <div class="hero-subtitle">
+                You found her. This is where the structured PM meets the chaotic creative. 
+                No Dashboards here, just passion.
+            </div>
+        </div>
+        <div class="scroll-indicator" data-hover-text="Scroll">
+            <div class="line"></div>
+            <span>Scroll to Explore</span>
+        </div>
+    </section>
+
+    <section class="creator-section">
+        <div class="huge-text" style="right: -10%; bottom: 20%;">Create</div>
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            <span class="section-label">// The Creator Mode</span>
+            <h2 class="section-heading">
+                Documenting <span style="color: var(--accent-red)">The Journey.</span>
+            </h2>
+            
+            <div class="video-grid">
+                <div class="video-frame" data-hover-text="Watch Now">
+                    <iframe src="https://www.youtube.com/embed/LFuL3TiwlFg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-frame" data-hover-text="Watch Now">
+                    <iframe src="https://www.youtube.com/embed/1KquDiuJrhg" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <a href="https://www.youtube.com/@SanskritiSriv" target="_blank" class="see-more-link" data-hover-text="My Channel">
+                See More on YouTube &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section class="stage-section">
+        <div class="container">
+            <div class="stage-grid">
+                <div class="stage-text">
+                    <span class="section-label">// The Energy</span>
+                    <h2>On Stage &<br>Unscripted.</h2>
+                    <p>Whether it's holding a mic to share ideas or hitting the dance floor to let loose, I believe in expression without filters. The confidence I build here is exactly what I bring into every boardroom.</p>
+                </div>
+                <div class="collage-wrapper">
+                     <img src="dance.jpg" alt="Dancing" class="collage-img img-dance" data-hover-text="Vibe">
+                    <img src="publicspeaking.jpg" alt="Speaking" class="collage-img img-speak" data-hover-text="Lead">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="painting-section">
+        <div class="huge-text" style="top: 20%; left: -10%;">Art</div>
+        <div class="container" style="max-width: 100%; width: 100%;">
+            <div style="padding-left: 2rem; max-width: 1400px; margin: 0 auto;">
+                <span class="section-label">// The Canvas</span>
+                <h2 class="section-heading">A Different Kind of <span style="color: var(--accent-red)">Storytelling.</span></h2>
+            </div>
+            
+            <div class="painting-scroll-wrapper" id="artScroller" data-hover-text="Drag to Scroll">
+                <div class="painting-card">
+                    <img src="whoami.jpg" alt="Abstract painting">
+                    <div class="painting-info">
+                        <h4 class="painting-title">Who Am I?</h4>
+                        <p class="painting-inspiration">"The moment in our lives where we all find ourselves stuck between 'Who we thought we were' and 'Who we actually are'. A trap where forming our own identity becomes a challenge."</p>
+                    </div>
+                </div>
+                <div class="painting-card">
+                    <img src="cage.jpg" alt="Colorful painting">
+                    <div class="painting-info">
+                        <h4 class="painting-title">Comfort Zone</h4>
+                        <p class="painting-inspiration">"A place often criticised, comfort zone is told to keep us trapped, away from all great possibilities; But to some it might be a place of protection, the imagination, which keeps them safe from the ugly."</p>
+                    </div>
+                </div>
+                <div class="painting-card">
+                    <img src="butterfly.jpg" alt="Palette knife painting">
+                    <div class="painting-info">
+                        <h4 class="painting-title">Just Butterfly</h4>
+                        <p class="painting-inspiration">"It's beautiful, just not complete. Or is it?"</p>
+                    </div>
+                </div>
+                 <div class="painting-card">
+                    <img src="definingbeauty.jpg" alt="Floral painting">
+                    <div class="painting-info">
+                        <h4 class="painting-title">Definition of beautiful</h4>
+                        <p class="painting-inspiration">"How come we defined beauty as something opposing nature? Shouldn't everything natural be nothing but gorgeous?"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="library-section">
+        <div class="container" style="margin-bottom: 4rem;">
+            <span class="section-label">//MY RECOMMENDATIONS</span>
+            <h2 class="section-heading">Fuel for the mind </h2>
+        </div>
+        
+        <div class="ticker-wrap" id="bookScroller" data-hover-text="Drag or Hover to Pause"> 
+            <div class="ticker">
+                <div class="book-card" data-hover-text="Read My Take">
+                    <img src="thealchemist.jpg" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">The Alchemist</h4>
+                        <p class="book-review">"The book that changed me, and how I think. So much depth in each word, holds meaning beyond the meaning, a must read for sure."</p>
+                    </div>
+                </div>
+                <div class="book-card" data-hover-text="Read My Take">
+                    <img src="Thesilentpatient.jpeg" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">The Silent Patient</h4>
+                        <p class="book-review">"One of the very few fictional books I have been able to completely read, a book that kept me on my toes, wondering, waiting and amazed."</p>
+                    </div>
+                </div>
+                 <div class="book-card" data-hover-text="Read My Take">
+                    <img src="the secret.jpg" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">The Secret</h4>
+                        <p class="book-review">"Makes you think beyond the practical, the kind of self help book that feels fictional, but once believed it feels like you always knew about it. Maybe watch the movie first."</p>
+                    </div>
+                </div>
+                
+                <div class="book-card" data-hover-text="Read My Take">
+                    <img src="greatestsalesman.jpg" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">The Greatest Salesman in the World</h4>
+                        <p class="book-review">"What seemed like a book about understanding others and making the best of it, turned out to be pages full of wisom to understanding yourself and utilizing that to the fullest."</p>
+                    </div>
+                </div>
+                <div class="book-card" data-hover-text="Read My Take">
+                    <img src="richdadpoordad.png" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">Rich Dad Poor Dad</h4>
+                        <p class="book-review">"You don't only think about what you want, but about how to get it. (Still on the read) "</p>
+                    </div>
+                </div>
+                 <div class="book-card" data-hover-text="Read My Take">
+                    <img src="101essays.jpg" alt="Book Cover" class="book-cover">
+                    <div class="book-info">
+                        <h4 class="book-title">101 Essays</h4>
+                        <p class="book-review">"Just thought-provoking"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="favorites-section">
+        <div class="container">
+            <span class="section-label">// Just for Fun</span>
+            <h2 class="section-heading">A Few of My <span style="color: var(--accent-red)">Favourite Things.</span></h2>
+            
+            <div class="favorites-grid">
+                <div class="favorites-column" data-hover-text="Books">
+                    <h3>Destinations</h3>
+                    <ul>
+                        <li>Daman Beach at 5 am</li>
+                        <li>Shahastradhaara Waterfall, when no one's interrupting</li>
+                        <li>The terrace at 3am with earphones and Atif Aslam</li>
+                        <li>Basilica of Our Lady of the mount (Mumbai's discipline at Bandra Station) </li>
+                        <li>Swaminarayan Temples</li>
+                        <li>Any place with my family</li>
+                    </ul>
+                </div>
+                <div class="favorites-column" data-hover-text="Food">
+                    <h3>Go-To Comfort Food</h3>
+                    <ul>
+                        <li>Belgian Waffle's Triple Chocolate (Sweet tooth? Add choco sprinkles and oreo) </li>
+                        <li>Rice Bowla by Big Bowl (I survived college on this)</li>
+                        <li>Litti Chokha in Lucknow</li>
+                        <li>Warm homemade Khichdi</li>
+                        <li>Natural's icecream (Oh my lovveee)</li>
+                        <li>A comforting fruits salad bowl: powers are unmatched</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="portal-footer">
+        <div class="container">
+            <p style="color: var(--text-dim); margin-bottom: 2rem; font-size: 1.2rem;">Have an idea or just want to chat?</p>
+            
+            <div class="creative-text" data-hover-text="Reach Out Below">
+                LET'S GET CREATIVE<br>TOGETHER
+            </div>
+
+            <div class="social-links-container">
+                
+                <a href="mailto:sanskriti.toobserve@gmail.com" class="social-btn email" data-hover-text="Email Me">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+
+                <a href="https://www.instagram.com/sanskritisriv_" target="_blank" class="social-btn insta" data-hover-text="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+                <a href="https://www.youtube.com/@SanskritiSriv" target="_blank" class="social-btn yt" data-hover-text="YouTube">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+             </div>
+        </div>
+    </section>
+
+    <script>
+        /* =========================================
+           CREATIVE JS: CURSOR & INTERACTIONS
+        ========================================= */
+        const cursor = document.querySelector('.cursor');
+        const hoverElements = document.querySelectorAll('[data-hover-text]');
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            const speed = 0.2; 
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            
+            cursor.style.left = (cursorX - 10) + 'px'; 
+            cursor.style.top = (cursorY - 10) + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('grow');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('grow');
+            });
+        });
+
+        /* =========================================
+           JS-POWERED SCROLLING (Books)
+        ========================================= */
+        const bookScroller = document.getElementById('bookScroller');
+        let isPaused = false;
+        let animationId;
+
+        // Auto-Scroll Function
+        function autoScrollBooks() {
+            if (!isPaused) {
+                // Adjust 0.8 for speed (higher = faster)
+                bookScroller.scrollLeft += 1;
+                
+                // Reset if reached end (simulate infinite)
+                if(bookScroller.scrollLeft >= (bookScroller.scrollWidth - bookScroller.clientWidth)) {
+                     bookScroller.scrollLeft = 0;
+                }
+            }
+            animationId = requestAnimationFrame(autoScrollBooks);
+        }
+
+        // Pause on Hover
+        bookScroller.addEventListener('mouseenter', () => { isPaused = true; });
+        bookScroller.addEventListener('mouseleave', () => { isPaused = false; });
+        
+        // Touch Support for Pause
+        bookScroller.addEventListener('touchstart', () => { isPaused = true; });
+        bookScroller.addEventListener('touchend', () => { isPaused = false; });
+
+        // Start the loop
+        animationId = requestAnimationFrame(autoScrollBooks);
+
+        /* =========================================
+           DRAG TO SCROLL (For Art & Books)
+           Allows mouse users to click and drag
+        ========================================= */
+        const sliders = [document.getElementById('bookScroller'), document.getElementById('artScroller')];
+        
+        sliders.forEach(slider => {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                isPaused = true; // Pause auto-scroll when dragging
+                slider.style.cursor = 'grabbing';
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                isPaused = false; // Resume auto-scroll (for books)
+                slider.style.cursor = 'grab';
+            });
+
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                isPaused = false; // Resume auto-scroll (for books)
+                slider.style.cursor = 'grab';
+            });
+
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        });
+
+    </script>
+</body>
+</html>
